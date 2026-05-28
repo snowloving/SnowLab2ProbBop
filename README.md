@@ -29,7 +29,8 @@ SnowBench/
 │   ├── binarized_modules.py/   # BinarizeLinear, BinarizeConv2d (1w1a / 1w32a)
 │   ├── binarynet.py/          
 │   └── resnet_binary.py/      
-│  
+│
+├── main_binary_sgdat.py        # Entry: binary models (models_sgdat)
 ├── main_binary_probbop.py      # Entry: binary (models_sgdat) — nearly identical to main_binary_sgdat.py except bin_optimizer.step(last_step=len(data_loader))
 └
 ```
