@@ -234,7 +234,7 @@ python main_binary_probbop.py --model resnet_binary --save resnet_cifar10_ProbBo
 | ProbBop | `"{0: {'optimizer': 'ProbBop','gamma':1e-4,'alpha':0.5,'threshold':1e-8, 'formula':11}}"` |
 | ProbBop2ndOrder | `"{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.6, 'formula':11}}"` |
 
-## 🧩 Experiments on imagenet + ProbBop2ndOrder
+## 🎨 Experiments on ImageNet
 
 <!-- **Command** 
 - Benchmark_imagenet_alexnet1w1a_cos.sh (4.0.1)
@@ -267,7 +267,7 @@ minlr=1e-4
 # Use paste and process substitution to iterate over seeds and GPU_ids simultaneously
 CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node 2 --master_port=28678 main_probs_imagenet.py -a alexnet_1w1a_sgdat --dali_cpu \
 -save imagenet_alexnet1w1a_benchmark_ProbBop2ndOrder_v4_Recu_cos  --wd ${wd} --lr ${lr} --minlr ${minlr} \
---epochs 200 -b 1024 -j 8 --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder_v4', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.5, 'formula':14}}" --lr_decay cos /home/hexue/bnn_vi-master/datasets/imagenet
+--epochs 200 -b 1024 -j 8 --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.5, 'formula':14}}" --lr_decay cos /home/hexue/bnn_vi-master/datasets/imagenet
 
 ```
 
@@ -283,7 +283,7 @@ minlr=1e-4
 # Use paste and process substitution to iterate over seeds and GPU_ids simultaneously
 CUDA_VISIBLE_DEVICES=2,3 torchrun --nproc_per_node 2 --master_port=24778 main_probs_imagenet.py -a resnet18_1w1a_sgdat  --dali_cpu \
 -save imagenet_birealnet1w1a_benchmark_ProbBop2ndOrder_v4_Recu_cos  --wd ${wd} --lr ${lr} --minlr ${minlr} \
---epochs 200 -b 1024 -j 8 --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder_v4', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.5, 'formula':14}}" --lr_decay cos /home/hexue/bnn_vi-master/datasets/imagenet
+--epochs 200 -b 1024 -j 8 --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.5, 'formula':14}}" --lr_decay cos /home/hexue/bnn_vi-master/datasets/imagenet
 
 ```
 
@@ -300,7 +300,7 @@ minlr=1e-4
 # Use paste and process substitution to iterate over seeds and GPU_ids simultaneously
 CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node 2 --master_port=28678 main_probs_imagenet.py -a alexnet_1w1a_sgdat --dali_cpu \
 -save imagenet_alexnet1w1a_benchmark_ProbBop2ndOrder_v4_Recu_MSteps  --wd ${wd} --lr ${lr} --minlr ${minlr} \
---epochs 200 -b 1024 -j 8 --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder_v4', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.5, 'formula':14}}" --lr_decay MSteps /home/hexue/bnn_vi-master/datasets/imagenet
+--epochs 200 -b 1024 -j 8 --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.5, 'formula':14}}" --lr_decay MSteps /home/hexue/bnn_vi-master/datasets/imagenet
 
 ```
 
@@ -317,7 +317,7 @@ minlr=1e-4
 # Use paste and process substitution to iterate over seeds and GPU_ids simultaneously
 CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node 2 --master_port=28678 main_probs_imagenet.py -a alexnet_1w1a_sgdat --dali_cpu \
 -save imagenet_alexnet1w1a_benchmark_ProbBop2ndOrder_v4_Recu_cos  --wd ${wd} --lr ${lr} --minlr ${minlr} \
---epochs 200 -b 1024 -j 8 --bin_regime "{0: {'optimizer': 'ProbBop_v4','gamma':1e-3,'alpha':0.5,'threshold':1e-8, 'formula':14}}" --lr_decay cos /home/hexue/bnn_vi-master/datasets/imagenet
+--epochs 200 -b 1024 -j 8 --bin_regime "{0: {'optimizer': 'ProbBop','gamma':1e-3,'alpha':0.5,'threshold':1e-8, 'formula':14}}" --lr_decay cos /home/hexue/bnn_vi-master/datasets/imagenet
 
 ```
 
