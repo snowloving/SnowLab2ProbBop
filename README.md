@@ -231,7 +231,7 @@ python main_binary_probbop.py --model resnet_binary --save resnet_cifar10_ProbBo
 
 | Optimizer | `--bin_regime` Configuration |
 |-----------|---------------------------|
-| ProbBop | `"{0: {'optimizer': 'ProbBop_v4','gamma':1e-4,'alpha':0.5,'threshold':1e-8, 'formula':11}}"` |
+| ProbBop | `"{0: {'optimizer': 'ProbBop','gamma':1e-4,'alpha':0.5,'threshold':1e-8, 'formula':11}}"` |
 | ProbBop2ndOrder | `"{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.6, 'formula':11}}"` |
 
 ---
