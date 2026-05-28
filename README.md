@@ -22,7 +22,7 @@ SnowBench/
 ├── results/
 ├── optimizers/                 # ProbBop/ProbBop2ndOrder
 │   ├── ProbBop.py/          
-│   └── ProbBop3ndOrder.py/  
+│   └── ProbBop2ndOrder.py/  
 │
 ├── models_sgdat/               # Binary models (SGDAT-style)
 │   ├── __init__.py.py/         # __all__ = ['binarynet', 'resnet_binary']
