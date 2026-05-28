@@ -205,24 +205,24 @@ python main_binary_sgdat.py --model resnet_binary --save resnet_binary_tiny_imag
 
 ---
 
-*Resnet with ProbBop_v4* 
+**cifar10 with ProbBop** 
 ```
-python main_probs.py --model resnet_binary --save resnet_cifar100_ProbBop_v4_f11 --dataset cifar100 --bin_regime "{0: {'optimizer': 'ProbBop_v4','gamma':1e-4,'alpha':0.5,'threshold':1e-8, 'formula':11}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 0
-```
-
-*Resnet with ProbBop_v4* 
-```
-python main_probs.py --model resnet_binary --save resnet_cifar100_ProbBop_v4_f14 --dataset cifar100 --bin_regime "{0: {'optimizer': 'ProbBop_v4','gamma':1e-4,'alpha':0.5,'threshold':1e-8, 'formula':14}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 3
+python main_binary_probbop.py --model resnet_binary --save resnet_cifar10_ProbBop_f11 --dataset cifar10 --bin_regime "{0: {'optimizer': 'ProbBop','gamma':1e-4,'alpha':0.5,'threshold':1e-8, 'formula':11}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 3
 ```
 
-*Resnet with ProbBop2ndOrder* 
+**cifar10 with ProbBop** 
 ```
-python main_probs.py --model resnet_binary --save resnet_cifar100_ProbBop2ndOrder_f11 --dataset cifar100 --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.6, 'formula':11}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 2
+python main_binary_probbop.py --model resnet_binary --save resnet_cifar10_ProbBop_f14 --dataset cifar10 --bin_regime "{0: {'optimizer': 'ProbBop','gamma':1e-4,'alpha':0.5,'threshold':1e-8, 'formula':14}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 3
 ```
 
-*Resnet with ProbBop2ndOrder* 
+**cifar10 with ProbBop2ndOrder** 
 ```
-python main_probs.py --model resnet_binary --save resnet_cifar100_ProbBop2ndOrder_f14 --dataset cifar100 --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.5, 'formula':14}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 3
+python main_binary_probbop.py --model resnet_binary --save resnet_cifar10_ProbBop2ndOrder_f11 --dataset cifar10 --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.6, 'formula':11}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 2
+```
+
+**cifar10 with ProbBop2ndOrder** 
+```
+python main_binary_probbop.py --model resnet_binary --save resnet_cifar10_ProbBop2ndOrder_f14 --dataset cifar10 --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.5, 'formula':14}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 3
 ```
 
 </details>
