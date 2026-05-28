@@ -39,8 +39,8 @@ SnowBench/
 ### Installation
 
 ```bash
-git clone https://github.com/snpwloving/SnowBench4Quant.git
-cd SnowBench4Quant
+git clone https://github.com/snowloving/SnowLab2ProbBop.git
+cd SnowLab2ProbBop
 pip install -r requirements.txt
 ```
 
