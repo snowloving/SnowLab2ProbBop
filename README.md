@@ -199,7 +199,7 @@ python main_binary_sgdat.py --model resnet_binary --save resnet_binary_tiny_imag
 
 | Optimizer | CIFAR-10 | CIFAR-100 | Tiny-ImageNet |
 |-----------|:--------:|:---------:|:-------------:|
-| ProbBop | ⌛️ | ⌛️ | ⌛️ |
+| ProbBop | 87.85 | ⌛️ | ⌛️ |
 | ProbBop2ndOrder | ⌛️ | ⌛️ | ⌛️  |
 
 <details> <summary>🔁 All Reproducible Commands on BinaryNet</summary>
