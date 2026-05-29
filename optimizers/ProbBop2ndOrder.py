@@ -36,7 +36,7 @@ class ProbBop2ndOrder(Optimizer):
         super(ProbBop2ndOrder, self).__init__(params, defaults)
 
     @torch.no_grad()
-    def step(self, last_step=196, closure=None):
+    def step(self, last_step, closure=None):
         """Performs a single optimization step.
 
         Args:
@@ -89,32 +89,30 @@ class ProbBop2ndOrder(Optimizer):
 
                     m_t = p.m / (p.v.sqrt() + 1e-10)
                     
-                    delta = abs(p.m) / (p.v.sqrt() + 1e-10) /threshold / pow(10, math.floor(p.epochs/100))
+                    delta = abs(p.m) / (p.v.sqrt() + 1e-10) /threshold       
 
-
-                    if formula==1 or formula==11:
-                        thresholds = alpha
-                    elif formula==2:
-                        thresholds = 1 - pow(alpha, p.epochs)/2
-                    elif formula==3:
-                        thresholds = alpha / pow(10, math.floor(p.epochs/50))
-                    elif formula==4:
-                        thresholds = alpha / pow(10, math.floor(p.epochs/100))
-                    elif formula==5:
-                        thresholds = alpha / pow(5, math.floor(p.epochs/50))
-
+                    thresholds = 1 - pow(alpha, p.epochs)/2
                     bigger_thresholds = (1/thresholds)
 
-                    indices = torch.where((torch.sign(m_t) == torch.sign(p.data)) & (delta>bigger_thresholds))
+
+
+                    if formula==0:
+                        indices = torch.where((torch.sign(m_t) == torch.sign(p.data)) & (delta>bigger_thresholds))
+                    else:
+                        indices = torch.where((torch.sign(m_t) == torch.sign(p.data)) & (delta/p.each_flip_num>bigger_thresholds))
 
                     p.data[indices] = -p.data[indices]
                     p.each_flip_num[indices] +=1
 
-                    indices = torch.where((torch.sign(m_t) == torch.sign(p.data)) & (delta>thresholds) & (delta<bigger_thresholds))
+                    if formula==0:
+                        indices = torch.where((torch.sign(m_t) == torch.sign(p.data)) & (delta>thresholds) & (delta<bigger_thresholds))
+                    else:
+                        indices = torch.where((torch.sign(m_t) == torch.sign(p.data)) & (delta/p.each_flip_num>thresholds) & (delta/p.each_flip_num<bigger_thresholds))
 
-                    prob = torch.exp(-delta[indices])
-                    if formula==11:
-                        prob = torch.exp(-delta[indices]/p.epochs)
+                    if formula==0:
+                        prob = torch.exp(-delta[indices])
+                    else:
+                        prob = torch.exp(-delta[indices]/(p.epochs * p.each_flip_num[indices]))
 
                     tmp = torch.sign(2*torch.bernoulli(prob) - 1)
 
