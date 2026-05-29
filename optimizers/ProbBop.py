@@ -14,7 +14,7 @@ class ProbBop(Optimizer):
         gamma: float = 1e-4,
         threshold: float = 1e-8,
         alpha: float = 0.5,
-        formula: int = 1,
+        formula: int = 0,
         name="ProbBop", 
         **kwargs
     ):
@@ -64,7 +64,7 @@ class ProbBop(Optimizer):
                         p.epochs = 1
 
                     if not hasattr(p, 'each_flip_num'):
-                        p.each_flip_num = torch.zeros_like(p, memory_format=torch.preserve_format)+1
+                        p.each_flip_num = torch.ones_like(p, memory_format=torch.preserve_format)
 
                     gamma= group['gamma']
                     alpha = group['alpha']
@@ -83,36 +83,24 @@ class ProbBop(Optimizer):
                     thresholds = 1 - pow(alpha, p.epochs)/2
                     bigger_thresholds = (1/thresholds)
 
-                    if int(formula/10)==0:
+
+                    if formula==0:
                         indices = torch.where((torch.sign(m_t) == torch.sign(p.data)) & (delta>bigger_thresholds))
-                    elif int(formula/10)==1:
+                    else:
                         indices = torch.where((torch.sign(m_t) == torch.sign(p.data)) & (delta/p.each_flip_num>bigger_thresholds))
-                    elif int(formula/10)==2:
-                        indices = torch.where((torch.sign(m_t) == torch.sign(p.data)) & (delta/(p.epochs * p.each_flip_num)>bigger_thresholds))
-                    elif int(formula/10)==3:
-                        indices = torch.where((torch.sign(m_t) == torch.sign(p.data)) & (delta/p.epochs>bigger_thresholds))
 
                     p.data[indices] = -p.data[indices]
                     p.each_flip_num[indices] +=1
 
-                    if int(formula/10)==0:
+                    if formula==0:
                         indices = torch.where((torch.sign(m_t) == torch.sign(p.data)) & (delta>thresholds) & (delta<bigger_thresholds))
-                    elif int(formula/10)==1:
+                    else:
                         indices = torch.where((torch.sign(m_t) == torch.sign(p.data)) & (delta/p.each_flip_num>thresholds) & (delta/p.each_flip_num<bigger_thresholds))
-                    elif int(formula/10)==2:
-                        indices = torch.where((torch.sign(m_t) == torch.sign(p.data)) & (delta/(p.epochs * p.each_flip_num)>thresholds) & (delta/(p.epochs * p.each_flip_num)<bigger_thresholds))
-                    elif int(formula/10)==3:
-                        indices = torch.where((torch.sign(m_t) == torch.sign(p.data)) & (delta/p.epochs>thresholds) & (delta/p.epochs<bigger_thresholds))
 
-                    if formula%10==0:
-                        prob = torch.exp(-delta[indices]/p.epochs)
-                    elif formula%10==1:
+
+                    if formula==0:
                         prob = torch.exp(-delta[indices])
-                    elif formula%10==2:
-                        prob = torch.exp(-delta[indices]/p.each_flip_num[indices])
-                    elif formula%10==3:
-                        prob = torch.exp(-delta[indices]/pow(p.each_flip_num[indices],2))
-                    elif formula%10==4:
+                    else:
                         prob = torch.exp(-delta[indices]/(p.epochs * p.each_flip_num[indices]))
 
                     tmp = torch.sign(2*torch.bernoulli(prob) - 1)
