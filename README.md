@@ -54,6 +54,50 @@ This benchmark supports two main experimental tracks:
 
 ### 🧩 Experiments on CIFAR and Tiny-imagenet
 
+#### 📊 Results on BinaryNet
+
+| Optimizer | CIFAR-10 | CIFAR-100 | Tiny-ImageNet |
+|-----------|:--------:|:---------:|:-------------:|
+| ProbBop | 89.48 | 64.17 | ⌛️ |
+| ProbBop2ndOrder | 89.81 | 65.56 | ⌛️  |
+
+
+<details> <summary>🔁 All Reproducible Commands on BinaryNet</summary>
+
+---
+
+**cifar10 with ProbBop** 
+```
+python main_binary_probbop.py --model binarynet  --save binarynet_cifar10_ProbBop_f0 --dataset cifar10 --bin_regime "{0: {'optimizer': 'ProbBop','gamma':1e-4,'alpha':0.5,'threshold':1e-8, 'formula':0}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 1
+```
+
+**cifar10 with ProbBop2ndOrder** 
+```
+python main_binary_probbop.py --model binarynet --save binarynet_cifar10_ProbBop2ndOrder_f0 --dataset cifar10 --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.6, 'formula':0}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 1
+```
+
+**cifar100 with ProbBop** 
+```
+python main_binary_probbop.py --model binarynet  --save binarynet_cifar100_ProbBop_f0 --dataset cifar100 --bin_regime "{0: {'optimizer': 'ProbBop','gamma':1e-4,'alpha':0.5,'threshold':1e-8, 'formula':0}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 1
+```
+
+**cifar100 with ProbBop2ndOrder** 
+```
+python main_binary_probbop.py --model binarynet --save binarynet_cifar100_ProbBop2ndOrder_f0 --dataset cifar100 --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.6, 'formula':0}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 1
+```
+
+**tiny_imagenet with ProbBop** 
+```
+python main_binary_probbop.py --model binarynet  --save binarynet_tiny_imagenet_ProbBop_f0 --dataset tiny_imagenet --bin_regime "{0: {'optimizer': 'ProbBop','gamma':1e-4,'alpha':0.5,'threshold':1e-8, 'formula':0}}"  --binarization det --input_size 64 --epochs 100 -b 256 -j 20 --gpus 1
+```
+
+**tiny_imagenet with ProbBop2ndOrder** 
+```
+python main_binary_probbop.py --model binarynet --save binarynet_tiny_imagenet_ProbBop2ndOrder_f0 --dataset tiny_imagenet --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.6, 'formula':0}}"  --binarization det --input_size 64 --epochs 100 -b 256 -j 20 --gpus 2
+```
+
+</details>
+
 #### 📊 Results on ResNet
 
 | Optimizer | CIFAR-10 | CIFAR-100 | Tiny-ImageNet |
@@ -196,49 +240,6 @@ python main_binary_sgdat.py --model resnet_binary --save resnet_binary_tiny_imag
 ```
 </details>
 
-#### 📊 Results on BinaryNet
-
-| Optimizer | CIFAR-10 | CIFAR-100 | Tiny-ImageNet |
-|-----------|:--------:|:---------:|:-------------:|
-| ProbBop | 89.48 | 64.17 | ⌛️ |
-| ProbBop2ndOrder | 89.81 | 65.56 | ⌛️  |
-
-
-<details> <summary>🔁 All Reproducible Commands on BinaryNet</summary>
-
----
-
-**cifar10 with ProbBop** 
-```
-python main_binary_probbop.py --model binarynet  --save binarynet_cifar10_ProbBop_f0 --dataset cifar10 --bin_regime "{0: {'optimizer': 'ProbBop','gamma':1e-4,'alpha':0.5,'threshold':1e-8, 'formula':0}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 1
-```
-
-**cifar10 with ProbBop2ndOrder** 
-```
-python main_binary_probbop.py --model binarynet --save binarynet_cifar10_ProbBop2ndOrder_f0 --dataset cifar10 --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.6, 'formula':0}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 1
-```
-
-**cifar100 with ProbBop** 
-```
-python main_binary_probbop.py --model binarynet  --save binarynet_cifar100_ProbBop_f0 --dataset cifar100 --bin_regime "{0: {'optimizer': 'ProbBop','gamma':1e-4,'alpha':0.5,'threshold':1e-8, 'formula':0}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 1
-```
-
-**cifar100 with ProbBop2ndOrder** 
-```
-python main_binary_probbop.py --model binarynet --save binarynet_cifar100_ProbBop2ndOrder_f0 --dataset cifar100 --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.6, 'formula':0}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 1
-```
-
-**tiny_imagenet with ProbBop** 
-```
-python main_binary_probbop.py --model binarynet  --save binarynet_tiny_imagenet_ProbBop_f0 --dataset tiny_imagenet --bin_regime "{0: {'optimizer': 'ProbBop','gamma':1e-4,'alpha':0.5,'threshold':1e-8, 'formula':0}}"  --binarization det --input_size 64 --epochs 100 -b 256 -j 20 --gpus 1
-```
-
-**tiny_imagenet with ProbBop2ndOrder** 
-```
-python main_binary_probbop.py --model binarynet --save binarynet_tiny_imagenet_ProbBop2ndOrder_f0 --dataset tiny_imagenet --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.6, 'formula':0}}"  --binarization det --input_size 64 --epochs 100 -b 256 -j 20 --gpus 2
-```
-
-</details>
 
 #### 🔨 Optimizer Configuration Reference
 
