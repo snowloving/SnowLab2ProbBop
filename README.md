@@ -58,8 +58,8 @@ This benchmark supports two main experimental tracks:
 
 | Optimizer | CIFAR-10 | CIFAR-100 | Tiny-ImageNet |
 |-----------|:--------:|:---------:|:-------------:|
-| ProbBop | 89.48 | 64.17 | ⌛️ |
-| ProbBop2ndOrder | 89.81 | 65.56 | ⌛️  |
+| ProbBop | 89.48 | 64.17 | 45.19 |
+| ProbBop2ndOrder | 89.81 | 65.56 | 46.58  |
 > 📝 **Notes:**
 > All results are from a single run with a fixed random seed (`seed_value=2020`). No hyperparameter tuning was performed.
 > 
