@@ -1,13 +1,23 @@
+<div align="center">
+
 # SnowLab2ProbBop
 
-This repository shows our neurocomputing paper "A probabilistic optimizer for binary neural networks".
+[![NeurIPS 2024](https://img.shields.io/badge/Neurocomputing-2025-blue.svg)](https://proceedings.neurips.cc/paper_files/paper/2024)
+[![Official Repo](https://img.shields.io/badge/Official-Repo-green.svg)](https://github.com/snownus/bnn_vi)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+This repository shows our neurocomputing paper *"A probabilistic optimizer for binary neural networks"*.
+
+
+</div>
+
+---
 
 ## 📌 Overview
 
 SnowLab2ProbBop is a PyTorch-based implementation of **ProbBop**, a probabilistic optimizer for Binary Neural Networks (BNNs). Unlike traditional BNN optimizers that rely on deterministic gradient approximations, ProbBop introduces a probabilistic treatment of binary weights, enabling more robust and accurate training.
 
----
+
 
 ## 📂 Repository Structure
 ```text
