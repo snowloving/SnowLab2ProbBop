@@ -6,7 +6,7 @@
 [![Official Repo](https://img.shields.io/badge/Official-Repo-green.svg)](https://github.com/snownus/bnn_vi)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This repository shows our neurocomputing paper *"A probabilistic optimizer for binary neural networks"*.
+Official Implementation of the Neurocomputing Paper: *"A probabilistic optimizer for binary neural networks"*.
 
 
 </div>
