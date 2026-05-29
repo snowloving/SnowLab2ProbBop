@@ -30,8 +30,8 @@ SnowBench/
 │   ├── binarynet.py/          
 │   └── resnet_binary.py/      
 │
-├── main_binary_sgdat.py        # Entry: binary models (models_sgdat)
-├── main_binary_probbop.py      # Entry: binary (models_sgdat) — nearly identical to main_binary_sgdat.py except bin_optimizer.step(last_step=len(data_loader))
+├── main_probbop_cifar.py       # Entry: binary (models_sgdat) — nearly identical to main_binary_sgdat.py except bin_optimizer.step(last_step=len(data_loader))
+├── main_probbop_imagenet.py    # Entry: binary (models_sgdat)
 └
 ```
 
@@ -60,7 +60,22 @@ This benchmark supports two main experimental tracks:
 |-----------|:--------:|:---------:|:-------------:|
 | ProbBop | 89.48 | 64.17 | ⌛️ |
 | ProbBop2ndOrder | 89.81 | 65.56 | ⌛️  |
+> 📝 **Notes:**
+> All results are from a single run with a fixed random seed (`seed_value=2020`). No hyperparameter tuning was performed.
+> 
+> ℹ️ **Note:** The "BinaryNet" used throughout this experiment refers to a compact VGG-style architecture (a.k.a. **VGG-Small**), implemented as `vgg_small` in `models_full_cifar/` and the "ResNet" used throughout this experiment refers to a ResNet18 architecture modified for ImageNet, implemented as `resnet18` in `models_full_cifar/`.
 
+#### 📋 Quick Example Command
+
+```bash
+python main_probbop_cifar.py \
+  --model binarynet \
+  --save binarynet_cifar10_ProbBop_f0 \
+  --dataset cifar10 \
+  --bin_regime "{0: {'optimizer': 'ProbBop','gamma':1e-4,'alpha':0.5,'threshold':1e-8, 'formula':0}}" \
+  --binarization det \
+  --gpus 0
+```
 
 <details> <summary>🔁 All Reproducible Commands on BinaryNet</summary>
 
@@ -68,32 +83,32 @@ This benchmark supports two main experimental tracks:
 
 **cifar10 with ProbBop** 
 ```
-python main_binary_probbop.py --model binarynet  --save binarynet_cifar10_ProbBop_f0 --dataset cifar10 --bin_regime "{0: {'optimizer': 'ProbBop','gamma':1e-4,'alpha':0.5,'threshold':1e-8, 'formula':0}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 1
+python main_probbop_cifar.py --model binarynet  --save binarynet_cifar10_ProbBop_f0 --dataset cifar10 --bin_regime "{0: {'optimizer': 'ProbBop','gamma':1e-4,'alpha':0.5,'threshold':1e-8, 'formula':0}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 1
 ```
 
 **cifar10 with ProbBop2ndOrder** 
 ```
-python main_binary_probbop.py --model binarynet --save binarynet_cifar10_ProbBop2ndOrder_f0 --dataset cifar10 --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.6, 'formula':0}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 1
+python main_probbop_cifar.py --model binarynet --save binarynet_cifar10_ProbBop2ndOrder_f0 --dataset cifar10 --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.6, 'formula':0}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 1
 ```
 
 **cifar100 with ProbBop** 
 ```
-python main_binary_probbop.py --model binarynet  --save binarynet_cifar100_ProbBop_f0 --dataset cifar100 --bin_regime "{0: {'optimizer': 'ProbBop','gamma':1e-4,'alpha':0.5,'threshold':1e-8, 'formula':0}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 1
+python main_probbop_cifar.py --model binarynet  --save binarynet_cifar100_ProbBop_f0 --dataset cifar100 --bin_regime "{0: {'optimizer': 'ProbBop','gamma':1e-4,'alpha':0.5,'threshold':1e-8, 'formula':0}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 1
 ```
 
 **cifar100 with ProbBop2ndOrder** 
 ```
-python main_binary_probbop.py --model binarynet --save binarynet_cifar100_ProbBop2ndOrder_f0 --dataset cifar100 --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.6, 'formula':0}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 1
+python main_probbop_cifar.py --model binarynet --save binarynet_cifar100_ProbBop2ndOrder_f0 --dataset cifar100 --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.6, 'formula':0}}"  --binarization det --input_size 32 --epochs 200 -b 256 -j 20 --gpus 1
 ```
 
 **tiny_imagenet with ProbBop** 
 ```
-python main_binary_probbop.py --model binarynet  --save binarynet_tiny_imagenet_ProbBop_f0 --dataset tiny_imagenet --bin_regime "{0: {'optimizer': 'ProbBop','gamma':1e-4,'alpha':0.5,'threshold':1e-8, 'formula':0}}"  --binarization det --input_size 64 --epochs 100 -b 256 -j 20 --gpus 1
+python main_probbop_cifar.py --model binarynet  --save binarynet_tiny_imagenet_ProbBop_f0 --dataset tiny_imagenet --bin_regime "{0: {'optimizer': 'ProbBop','gamma':1e-4,'alpha':0.5,'threshold':1e-8, 'formula':0}}"  --binarization det --input_size 64 --epochs 100 -b 256 -j 20 --gpus 1
 ```
 
 **tiny_imagenet with ProbBop2ndOrder** 
 ```
-python main_binary_probbop.py --model binarynet --save binarynet_tiny_imagenet_ProbBop2ndOrder_f0 --dataset tiny_imagenet --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.6, 'formula':0}}"  --binarization det --input_size 64 --epochs 100 -b 256 -j 20 --gpus 2
+python main_probbop_cifar.py --model binarynet --save binarynet_tiny_imagenet_ProbBop2ndOrder_f0 --dataset tiny_imagenet --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.6, 'formula':0}}"  --binarization det --input_size 64 --epochs 100 -b 256 -j 20 --gpus 2
 ```
 
 </details>
@@ -110,25 +125,8 @@ python main_binary_probbop.py --model binarynet --save binarynet_tiny_imagenet_P
 | SGDT | ⌛️ | ⌛️ | ⌛️ |
 | SGDAT | ⌛️ | ⌛️ | ⌛️ |
 | ProbBop | ⌛️ | ⌛️ | ⌛️ |
-| ProbBop_f | ⌛️ | ⌛️ | ⌛️ |
 | ProbBop2ndOrder | ⌛️ | ⌛️ | ⌛️  |
-| ProbBop2ndOrder_f | ⌛️ | ⌛️ | ⌛️  |
-> 📝 **Notes:**
-> All results are from a single run with a fixed random seed (`seed_value=2020`). No hyperparameter tuning was performed.
-> 
-> ℹ️ **Note:** The "BinaryNet" used throughout this experiment refers to a compact VGG-style architecture (a.k.a. **VGG-Small**), implemented as `vgg_small` in `models_full_cifar/` and the "ResNet" used throughout this experiment refers to a ResNet18 architecture modified for ImageNet, implemented as `resnet18` in `models_full_cifar/`.
 
-#### 📋 Quick Example Command
-
-```bash
-python main_binary_sgdat.py \
-  --model resnet_binary \
-  --save resnet_binary_cifar10_SGD \
-  --dataset cifar10 \
-  --bin_regime "{0: {'optimizer': 'SGD', 'lr': 1e-4}}" \
-  --binarization det \
-  --gpus 0
-```
 
 <details> <summary>🔁 All Reproducible Commands on ResNet</summary>
 
@@ -279,7 +277,7 @@ lr=0.1
 minlr=1e-4
 
 # Use paste and process substitution to iterate over seeds and GPU_ids simultaneously
-CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node 2 --master_port=28678 main_binary_probbop_imagenet.py -a alexnet_1w1a_sgdat --dali_cpu \
+CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node 2 --master_port=28678 main_probbop_imagenet.py -a alexnet_1w1a_sgdat --dali_cpu \
 -save imagenet_alexnet1w1a_benchmark_ProbBop2ndOrder_Recu_cos  --wd ${wd} --lr ${lr} --minlr ${minlr} \
 --epochs 200 -b 1024 -j 8 --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.5, 'formula':14}}" --lr_decay cos /home/hexue/bnn_vi-master/datasets/imagenet
 
@@ -295,7 +293,7 @@ lr=0.1
 minlr=1e-4
 
 # Use paste and process substitution to iterate over seeds and GPU_ids simultaneously
-CUDA_VISIBLE_DEVICES=2,3 torchrun --nproc_per_node 2 --master_port=24778 main_binary_probbop_imagenet.py -a resnet18_1w1a_sgdat  --dali_cpu \
+CUDA_VISIBLE_DEVICES=2,3 torchrun --nproc_per_node 2 --master_port=24778 main_probbop_imagenet.py -a resnet18_1w1a_sgdat  --dali_cpu \
 -save imagenet_birealnet1w1a_benchmark_ProbBop2ndOrder_Recu_cos  --wd ${wd} --lr ${lr} --minlr ${minlr} \
 --epochs 200 -b 1024 -j 8 --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.5, 'formula':14}}" --lr_decay cos /home/hexue/bnn_vi-master/datasets/imagenet
 
@@ -312,7 +310,7 @@ lr=0.1
 minlr=1e-4
 
 # Use paste and process substitution to iterate over seeds and GPU_ids simultaneously
-CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node 2 --master_port=28678 main_binary_probbop_imagenet.py -a alexnet_1w1a_sgdat --dali_cpu \
+CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node 2 --master_port=28678 main_probbop_imagenet.py -a alexnet_1w1a_sgdat --dali_cpu \
 -save imagenet_alexnet1w1a_benchmark_ProbBop2ndOrder_Recu_MSteps  --wd ${wd} --lr ${lr} --minlr ${minlr} \
 --epochs 200 -b 1024 -j 8 --bin_regime "{0: {'optimizer': 'ProbBop2ndOrder', 'gamma':1e-8,'sigma':1e-3,'threshold':1e-8,'alpha':0.5, 'formula':14}}" --lr_decay MSteps /home/hexue/bnn_vi-master/datasets/imagenet
 
@@ -329,7 +327,7 @@ lr=0.1
 minlr=1e-4
 
 # Use paste and process substitution to iterate over seeds and GPU_ids simultaneously
-CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node 2 --master_port=28678 main_binary_probbop_imagenet.py -a alexnet_1w1a_sgdat --dali_cpu \
+CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node 2 --master_port=28678 main_probbop_imagenet.py -a alexnet_1w1a_sgdat --dali_cpu \
 -save imagenet_alexnet1w1a_benchmark_ProbBop2ndOrder_Recu_cos  --wd ${wd} --lr ${lr} --minlr ${minlr} \
 --epochs 200 -b 1024 -j 8 --bin_regime "{0: {'optimizer': 'ProbBop','gamma':1e-3,'alpha':0.5,'threshold':1e-8, 'formula':14}}" --lr_decay cos /home/hexue/bnn_vi-master/datasets/imagenet
 
