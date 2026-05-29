@@ -15,9 +15,13 @@ Official Implementation of the Neurocomputing Paper: *"A probabilistic optimizer
 
 ## 📌 Overview
 
-SnowLab2ProbBop is a PyTorch-based implementation of **ProbBop**, a probabilistic optimizer for Binary Neural Networks (BNNs). Unlike traditional BNN optimizers that rely on deterministic gradient approximations, ProbBop introduces a probabilistic treatment of binary weights, enabling more robust and accurate training.
+**ProbBop** (Probabilistic Binary Optimizer) introduces a principled framework for training Binary Neural Networks (BNNs). Unlike conventional methods that rely on biased gradient estimators such as the Straight-Through Estimator (STE), ProbBop introduces a probabilistic treatment of binary weights, enabling more robust and accurate training.
 
+Key advantages:
+- **No Gradient Approximation:** Eliminates the need for STE or other heuristic gradient surrogates.
+- **Competitive Performance:** Achieves strong accuracy on standard benchmarks while maintaining the efficiency of binary networks.
 
+---
 
 ## 📂 Repository Structure
 ```text
@@ -368,9 +372,3 @@ For questions or suggestions, please open an issue or contact a1311965600@gmail.
 
 Contact
 For questions or issues, please open a GitHub issue or contact the corresponding author via the paper.
-
-text
-
----
-
-Let me know if you want me to adjust the **project name**, **license type**, or add a **code of conduct / contributing guide**.
