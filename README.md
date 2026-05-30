@@ -25,7 +25,7 @@ Key advantages:
 
 ## 📂 Repository Structure
 ```text
-SnowBench/
+SnowLab2ProbBop/
 ├── README.md                   
 ├── requirements.txt            
 ├── data.py                     # Dataset loader: CIFAR-10/100, Tiny-ImageNet, ImageNet (with path configuration)
